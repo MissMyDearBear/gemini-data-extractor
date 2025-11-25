@@ -26,13 +26,17 @@ except KeyError:
 
 # 3. 初始化 Gemini 客户端
 # 配置安全设置，避免模型因为内容略微敏感而拒绝输出
-client = genai.Client(
-    api_key=API_KEY,
-    safety_settings=[
-        # 允许模型在安全等级较低的情况下输出结果，提高数据提取成功率
-        HarmCategory.HARM_CATEGORY_HARASSMENT, HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-    ]
-)
+client = genai.Client(api_key=API_KEY)
+
+# 将安全配置提取为一个单独的变量
+# 注意：HarmCategory 和 HarmBlockThreshold 必须是 types.SafetySetting 对象
+SAFETY_CONFIG = [
+    genai.types.SafetySetting(
+        category=HarmCategory.HARM_CATEGORY_HARASSMENT,
+        threshold=HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+    )
+    # 你可以在这里添加其他安全设置
+]
 # 使用 1.5 Flash 模型，它具有多模态和长上下文能力，且推理速度快、成本低
 MODEL = "gemini-1.5-flash"
 
