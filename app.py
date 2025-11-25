@@ -38,7 +38,7 @@ SAFETY_CONFIG = [
     # 你可以在这里添加其他安全设置
 ]
 # 使用 1.5 Flash 模型，它具有多模态和长上下文能力，且推理速度快、成本低
-MODEL = "gemini-1.5-flash"
+MODEL = "gemini-2.5-flash"
 
 
 # 4. 核心逻辑函数：调用 Gemini API 进行图片分析
